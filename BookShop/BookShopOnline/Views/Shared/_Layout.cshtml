@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Welcome to Booklovers - World of Books</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--import library-->
+
+    <link rel="stylesheet" href="~/assets/library/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/library/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/assets/library/css/meanmenu.min.css">
+    <link rel="stylesheet" href="~/assets/library/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/assets/library/css/owl.theme.css">
+    <link rel="stylesheet" href="~/assets/library/css/owl.transitions.css">
+    <link rel="stylesheet" href="~/assets/library/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/assets/library/css/jquery-ui.css" />
+    <link rel="stylesheet" href="~/assets/library/css/nivo-slider.css">
+    <link rel="stylesheet" href="~/assets/library/css/animate.css">
+    <link rel="stylesheet" href="~/assets/library/css/jquery-ui-slider.css">
+    <link rel="stylesheet" href="~/assets/library/css/normalize.css">
+    <link rel="stylesheet" href="~/assets/library/css/main.css">
+    <link rel="stylesheet" href="~/assets/library/css/style.css">
+    <link rel="stylesheet" href="~/assets/library/css/responsive.css">
+    <link rel="stylesheet" href="~/assets/library/css/sweetalert.min.css" />
+
+
+</head>
+@using BookShopOnline.Common;
+
+<body class="home-one">
+    <!--HEADER-->
+    <div class="header-area">
+        <div class="header-top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p>Welcome to Booklovers - World of Books !</p>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-9" style="text-align:right">
+                                @{
+                                    var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+                                }
+                                @if (session == null)
+                                {
+                                    <span>@Html.ActionLink("Đăng ký", "Register", "Users", null, new { @class = "text-white" }) | </span>
+                                    <span>@Html.ActionLink("Đăng nhập", "Login", "Users", null, new { @class = "text-white" })</span>
+                                }
+                                else
+                                {
+                                    <img src="~/assets/images/@session.Image" width="30" style="border-radius: 50%"/><a href="/Users/Detail/@session.UserID" style="color:white; padding: 0px 8px;">@session.Name |</a>
+                                    <span>@Html.ActionLink("Đăng xuất", "Logout", "Users", null, new { @class = "text-white" })</span>
+                                }
+                            </div>
+                            <div class="col-md-3">
+                                <p>| Free Call: 101-219-9600</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <div class="header-logo">
+                            <a href="#"><img src="~/assets/images/logo2.png" alt="logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="search-chart-list col-md-9">
+                            <div class="header-search">
+                                <form action="/Product/Search" method="get">
+                                    <input type="text" id="txtKeyword" name="keyword" placeholder="Nhập sách cần tìm...">
+                                    <button type="submit"><i class="fas fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="shopping-cart col-md-3">
+                            @{ Html.RenderAction("Cart", "Home");}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MENU  -->
+    <div class="main-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-9">
+                    <div class="main-menu hidden-xs fixed-top">
+                        <nav>
+                            <ul>
+                                <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                                <li>
+                                    <a href="/Product/Category/1">Sản phẩm</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="/Product/Category/1">Tư duy - Kỹ năng sống</a></li>
+                                        <li><a href="/Product/Category/2">Truyện ngắn - Tản văn</a></li>
+                                        <li><a href="/Product/Category/3">Sách luyện thi</a></li>
+                                        <li><a href="/Product/Category/4">Sách kinh tế</a></li>
+                                        <li><a href="/Product/Category/5">Sách văn học nước ngoài</a></li>
+                                        <li><a href="/Product/Category/6">Kiến thức bách khoa</a></li>
+                                        <li><a href="/Product/Category/7">Sách thiếu nhi</a></li>
+                                        <li><a href="/Product/Category/8">Sách học ngoại ngữ</a></li>
+                                        <li><a href="/Product/Category/9">Tủ sách doanh nhân</a></li>
+                                        <li><a href="/Product/Category/10">Tác phẩm kinh điển</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/Promotion/Index">Ưu đãi khuyến mại</a></li>
+                                <li><a href="/News/Index">Tin tức</a></li>
+                                <li><a href="/Home/About">Về chúng tôi</a></li>
+                                <li><a href="/Home/Contact">Liên hệ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--Main-->
+
+    <div class="main-body">
+        @RenderBody()
+    </div>
+
+    <!--Footer-->
+    <div class="footer-area">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                        <div class="footer-info-card">
+                            <div class="footer-logo">
+                                <a href="#"><img src="~/assets/images/logo1.png" alt="logo"></a>
+                            </div>
+                            <p>Hệ thống Booklovers hỗ trợ đặt hàng trực tuyến và giao hàng tận nơi nhanh nhất trên toàn quốc.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="footer-menu-area">
+                            <h2 class="footer-heading">Hỗ trợ</h2>
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i> Chính sách đổi trả</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i> Chính sách sỉ - lẻ</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i> Chính sách bảo mật</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i> Phương thức vận chuyển</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i> Phương thức thanh toán</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12">
+                        <div class="contact-info-area">
+                            <h2 class="footer-heading">Liên hệ với chúng tôi</h2>
+                            <div class="contact-info">
+                                <div class="contanct-details">
+                                    <div class="info-icon">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+                                    <div class="info-content">
+                                        <p>101-219-9600</p>
+                                    </div>
+                                </div>
+                                <div class="contanct-details">
+                                    <div class="info-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="info-content">
+                                        <p>booklovers101@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="contanct-details">
+                                    <div class="info-icon">
+                                        <i class="fa fa-map-marker"></i>
+                                    </div>
+                                    <div class="info-content">
+                                        <p>298 Cầu Diễn, Minh Khai, Bắc Từ Liêm, Hà Nội</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="toTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    <!-- JS -->
+    <script src="~/assets/library/js/jquery.min.js"></script>
+    <script src="~/assets/library/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="~/assets/library/js/vendor/jquery-1.11.3.min.js"></script>
+    <script src="~/assets/library/js/bootstrap.min.js"></script>
+    <script src="~/assets/library/js/jquery-ui.js"></script>
+    <script src="~/assets/library/js/jquery.nivo.slider.pack.js"></script>
+    <script src="~/assets/library/js/jquery.meanmenu.min.js"></script>
+    <script src="~/assets/library/js/owl.carousel.min.js"></script>
+    <script src="~/assets/library/js/jquery-price-slider.js"></script>
+    <script src="~/assets/library/js/wow.js"></script>
+    <script src="~/assets/library/js/all.min.js"></script>
+    <script src="~/assets/library/js/plugin/ckfinder/ckfinder.js"></script>
+    <script src="~/assets/library/js/sweetalert.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <script src="~/assets/library/js/plugins.js"></script>
+    <script src="~/assets/library/js/main.js"></script>
+    <script src="~/assets/library/js/baseCtrl.js"></script>
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

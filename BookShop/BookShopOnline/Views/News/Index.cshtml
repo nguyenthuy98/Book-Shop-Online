@@ -1,0 +1,23 @@
+﻿@model List<Model.EF.TinTuc>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid ctn">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="/News/Detail/@item.MaTinTuc"><h4 class="card-title">@item.TieuDe</h4></a>
+                        <div class="content-card" id="CardContent">
+                            <p class="card-text">@item.NoiDung</p>
+                        </div>
+                        <p>.....</p>
+                        <a href="/News/Detail/@item.MaTinTuc" class="btn btn-primary" >Learn more...</a>
+                    </div>
+                </div>
+            </div>
+        }       
+</div>

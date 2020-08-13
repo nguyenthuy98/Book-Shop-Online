@@ -1,0 +1,198 @@
+﻿@model Model.EF.Sach
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sameProducts = (List<Model.EF.Sach>)ViewBag.SameProducts;
+}
+@section jsFooter{
+    <script>
+    $(document).ready(function () {
+        $('.btn-number').click(function (e) {
+            e.preventDefault();
+            fieldName = $(this).attr('data-field');
+            type = $(this).attr('data-type');
+            var input = $("input[name='" + fieldName + "']");
+            var currentVal = parseInt(input.val());
+            if (!isNaN(currentVal)) {
+                if (type == 'minus') {
+
+                    if (currentVal > input.attr('min')) {
+                        input.val(currentVal - 1).change();
+                    }
+                    if (parseInt(input.val()) == input.attr('min')) {
+                        $(this).attr('disabled', true);
+                    }
+
+                } else if (type == 'plus') {
+
+                    if (currentVal < input.attr('max')) {
+                        input.val(currentVal + 1).change();
+                    }
+                    if (parseInt(input.val()) == input.attr('max')) {
+                        $(this).attr('disabled', true);
+                    }
+
+                }
+            } else {
+                input.val(0);
+            }
+        });
+        $('.input-number').focusin(function () {
+            $(this).data('oldValue', $(this).val());
+        });
+        $('.input-number').change(function () {
+
+            minValue = parseInt($(this).attr('min'));
+            maxValue = parseInt($(this).attr('max'));
+            valueCurrent = parseInt($(this).val());
+
+            name = $(this).attr('name');
+            if (valueCurrent >= minValue) {
+                $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
+            } else {
+                alert('Số lượng sản phẩm phải lớn hơn hoặc bằng 1');
+                $(this).val($(this).data('oldValue'));
+            }
+            if (valueCurrent <= maxValue) {
+                $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
+            } else {
+                alert('Xin lỗi, số lượng sản phẩm trong kho không đủ');
+                $(this).val($(this).data('oldValue'));
+            }
+
+
+        });
+        $(".input-number").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+        $('#ButtonCart').click(function () {
+            var sl = parseInt(document.getElementById("quantity").value, 10);
+            window.location.href ="/them-gio-hang?productId=@Model.MaSach&quantity="+sl;
+        });
+    });
+    </script>
+}
+<div class="product-item-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="row content">
+                    <div class="col-md-5 col-sm-5">
+                        <div class="product-item-tab">                            
+                            <div class="single-tab-content">
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="img-one"><img src="~/assets/images/@Model.HinhAnh" alt="tab-img"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-7">
+                        <div class="product-tab-content" style="margin-top:-20px">
+                            <div class="product-tab-header" style="position:relative;">
+                                <h1 style="margin-bottom:25px">@Model.TenSach</h1>
+                                <strike style="font-size:16px"><sup>đ</sup><span>@Model.GiaBan.ToString("N0")</span></strike>
+                                <span style="font-size:30px; color:orange"><sup>đ</sup>@((Model.GiaBan - Model.KhuyenMai.ChietKhau * Model.GiaBan / 100).ToString("N0"))</span>
+                                <span style="position:absolute;color:white; background-color: crimson; border-radius: 4px; padding:2px;left: 207px;top:70%;width:50px;text-align:center ">-@Model.KhuyenMai.ChietKhau%</span>                      
+                            </div>
+                            <div class="product-item-code" style="padding-top:30px">                                
+                                <p>Tác giả :<a href="/Product/AuthorDetail/@Model.MaSach"> @Html.DisplayFor(modelItem => Model.TacGia.TenTG)</a></p>                               
+                                <p>Nhà xuất bản :<a href="/Product/PublisherDetail/@Model.MaSach"> @Html.DisplayFor(modelItem => Model.NhaXB.TenNXB)</a></p>
+                                <p>Ngày phát hành : @Html.DisplayFor(modelItem => Model.NgayPhatHanh)</p>                                
+                            </div>
+                            <div style="position:relative">
+                                <p style="position:absolute; top:67px">Số lượng: </p>
+                                <div class="groupQty" style="padding-top:37px; position:absolute;left: 76px;">
+                                    <br />
+                                    <div class="input-group" style="width:120px">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </button>
+                                        </span>
+                                        <input type="text" name="quant[2]" class="form-control input-number txtQuantity" value="1" min="1" max="@Model.SoLuong" style="text-align:center" id="quantity">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p style="margin:-28px 135px">@Model.SoLuong sản phẩm có sẵn</p>
+                                  
+                                </div>
+                                <div id="ButtonCart" class="btn btn-warning" style="position: absolute; top:130px; width:230px; height: 40px; font-weight: bold; font-size: 18px;">Thêm vào giỏ hàng <i class="fas fa-cart-plus"></i></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="description-tab">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab">Giới thiệu sách</a></li>
+                                <li role="presentation"><a href="#information" role="tab" data-toggle="tab">Đánh giá</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="description">
+                                    <p>@Model.MoTa</p>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="information">
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="single-product-slider similar-product">
+                            <div class="product-items">
+                                <h2 class="product-header">Có thể bạn quan tâm</h2>
+                                <div class="row">
+                                    <div id="singleproduct-slider" class="owl-carousel">
+                                        @foreach (var item in sameProducts)
+                                        {
+                                            <div>
+                                                <div class="single-product">
+                                                    <div class="single-product-img">
+                                                        <a href="/Product/Detail/@item.MaSach">
+                                                            <img class="primary-img" src="~/assets/images/@item.HinhAnh" alt="product">
+                                                        </a>
+                                                        <div class="single-product-action">
+                                                            <a href="/Product/Detail/@item.MaSach"><i class="fas fa-eye"></i></a>
+                                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="single-product-content">
+                                                        <div class="product-content">
+                                                            <h2><a href="/Product/Detail/@item.MaSach">@item.TenSach</a></h2>
+                                                            <p>Gía : @item.GiaBan VNĐ</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

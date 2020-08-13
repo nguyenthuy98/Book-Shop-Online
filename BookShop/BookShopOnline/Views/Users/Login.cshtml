@@ -1,0 +1,51 @@
+﻿@model BookShopOnline.Models.Login
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="formLogin">
+    <div class="transbox"></div>
+    @using (Html.BeginForm("Login", "Users", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal login-form">
+            <form class="text-center border border-light p-5" action="#!">
+                <p class="h4 mb-4">Đăng nhập</p>
+
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { placeholder = "Tên đăng nhập", @class = "form-control name" } })
+                <br />
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-white" })
+
+
+                @Html.PasswordFor(model => model.Password, new { @placeholder = "Mật khẩu", @class = "form-control pass", @style = "margin: 15px 0px" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-white" })   
+                <div class="d-flex justify-content-around" style="padding-top:15px">
+                    <div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                            <label class="custom-control-label" for="defaultLoginFormRemember">Ghi nhớ tôi</label>
+                        </div>
+                    </div>
+                    <div>
+
+                        <a href="#" style="color:white">Quên mật khẩu?</a>
+                    </div>
+                </div>
+                
+
+                <button class="btn btn-info btn-block" type="submit" style="margin:10px 0px">Đăng nhập</button>
+                <p>
+                    Chưa có tài khoản?
+                    <a href="/Users/Login" style="color:white">Đăng ký</a>
+                </p>
+                <p>Hoặc:</p>
+                <a class="btn btn-success btn-block my-4" href="#"><i class="fab fa-facebook-f light-blue-text" id="login"></i> Đăng nhập bằng Facebook</a>
+            </form>
+        </div>
+    }
+    <div class="end-content">
+        <p class="text-1">Discover your next book!</p>
+        <p class="text-2">Find book for all age</p>
+    </div>
+</div>
+

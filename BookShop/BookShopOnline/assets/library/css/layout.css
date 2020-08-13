@@ -1,0 +1,54 @@
+h3{
+    font-family: cursive;
+    font-size: 32px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+.fa-sort-down {
+    margin-left: 65px;
+}
+.card {
+    float: left;
+    width: 35%;
+    background-color: brown;
+    margin: 10px 45px;
+}
+.card-img-top{
+    float:left;
+    width:100px !important;
+}
+.card-body p {
+    font-size: 25px;
+    margin:20px 10px;
+    color: wheat;
+    font-family: cursive;
+}
+#wrapper {
+    background-color: darkcyan;
+}
+.card:hover{
+    background-color:darkgray;
+    color:black;
+}
+table thead tr th{
+    text-align:center !important;
+}
+.control-label {
+    margin-bottom: 0px !important;
+    text-align: left !important;
+}
+.nav{
+    padding-top: 0px !important;
+}
+.form-horizontal{
+    width:915px !important;
+}
+.h1,h1{
+    font-size:25px !important;
+}
+.breadcrumb{
+    margin-left: -40px !important;
+}
+ol li:first-child{
+    padding-left: 25px !important;
+}

@@ -1,0 +1,67 @@
+﻿@model Model.EF.DonHang
+@{
+    Layout = null;
+}
+@using BookShopOnline.Common;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Xác nhận đơn hàng</title>
+</head>
+<body>
+    @using (Html.BeginForm("ConfirmOrder", "Order", FormMethod.Post))
+    {
+        var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+        <input type="text" class="form-control" name="matk" value="@session.UserID" style="display:none">
+        <input type="text" class="form-control" name="tongtien" id="TongTien" style="display:none" value="@Model.TongTien">
+        <input type="text" class="form-control" name="ngaydat" style="display:none" value="@Model.NgayDatHang">
+        <div class="form-group" style="padding-bottom: 20px">
+            <label class="control-label col-md-3">
+                Người đặt<sup>*</sup>
+            </label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="nguoidat" required value="@Model.NguoiDat">
+            </div>
+        </div>
+        <div class="form-group" style="padding-bottom: 20px">
+            <label class="control-label col-md-3">
+                Người nhận<sup>*</sup>
+            </label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="nguoinhan" required value="@Model.NguoiNhan">
+            </div>
+        </div>
+        <div class="form-group" style="padding-bottom: 20px">
+            <label class="control-label col-md-3">
+                Địa chỉ<sup>*</sup>
+            </label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="diachi" required value="@Model.DiaChiNguoiNhan">
+            </div>
+        </div>
+        <div class="form-group" style="padding-bottom: 20px">
+            <label class="control-label col-md-3">
+                Số điện thoại<sup>*</sup>
+            </label>
+            <div class="col-md-9">
+                <input type="tel" class="form-control" name="sdt" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required value="@Model.SDTNguoiNhan">
+            </div>
+        </div>
+        <div class="form-group" style="padding-bottom: 20px">
+            <label class="control-label col-md-3">
+                Chú thích<sup>*</sup>
+            </label>
+            <div class="col-md-9">
+                <textarea rows="9" name="chuthich" class="form-control"></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn">Xác nhận</button>
+
+    }
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+</body>
+</html>

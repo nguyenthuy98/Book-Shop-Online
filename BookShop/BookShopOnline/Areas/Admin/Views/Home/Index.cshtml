@@ -1,0 +1,137 @@
+﻿@model Model.EF.DonHang
+
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/assets/library/css/layout.css")
+<link href="~/assets/library/css/layout.css" rel="stylesheet" />
+<style>
+    tr td {
+        text-align: center;
+    }
+</style>
+@section jsFooter{
+    <script src="~/assets/library/js/Chart.min.js"></script>
+    <script>
+        let myChart = document.getElementById('myChart').getContext('2d');
+        let massPopChart = new Chart(myChart, {
+            type: 'bar',
+            data: {
+                labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                datasets: [{
+                    label: 'Doanh thu',
+                    data: [
+                      @ViewBag.Total1,
+                      @ViewBag.Total2,
+                      @ViewBag.Total3,
+                      @ViewBag.Total4,
+                      @ViewBag.Total5,
+                      0, 0, 0, 0, 0, 0, 0
+                    ],
+                    backgroundColor: [
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)',
+                      'rgba(255, 206, 86, 0.6)',
+                      'rgba(75, 192, 192, 0.6)',
+                      'rgba(153, 102, 255, 0.6)',
+                      'rgba(255, 159, 64, 0.6)',
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)',
+                      'rgba(255, 206, 86, 0.6)',
+                      'rgba(75, 192, 192, 0.6)',
+                      'rgba(153, 102, 255, 0.6)'
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#777',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Biểu đồ thống kê doanh thu',
+                    fontSize: 25
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+                tooltips: {
+                    enabled: true
+                }
+            }
+        });
+    </script>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10" style="padding-top: 25px;">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-md-10" style="padding-top:100px">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Số thứ tự</th>
+                        <th>Thời gian</th>
+                        <th>Tổng số đơn hàng</th>
+                        <th>Doanh thu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>01/2020</td>
+                        <td>
+                            @ViewBag.Counts1
+                        </td>
+                        <td>
+                            @ViewBag.Total1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>02/2020</td>
+                        <td>
+                            @ViewBag.Counts2
+                        </td>
+                        <td>@ViewBag.Total2</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>03/2020</td>
+                        <td>@ViewBag.Counts3</td>
+                        <td>@ViewBag.Total3</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>04/2020</td>
+                        <td>@ViewBag.Counts4</td>
+                        <td>@ViewBag.Total4</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>05/2020</td>
+                        <td>@ViewBag.Counts5</td>
+                        <td>@ViewBag.Total5</td>
+                        @*<td><a href="/Admin/Order/DetailsMonth/5"><i class="fas fa-eye"></i></a></td>*@
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

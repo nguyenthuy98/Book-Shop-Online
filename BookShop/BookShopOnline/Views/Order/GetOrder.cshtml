@@ -1,0 +1,98 @@
+﻿@model List<Model.EF.DonHang>
+@{
+    ViewBag.Title = "GetOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using BookShopOnline.Common;
+@{
+    var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+}
+@section jsFooter{
+    <script>
+        $(document).ready(function () {
+            $(".clickable-row").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+}
+<div class="container">
+    <div class="row detail-acc-area" style="height:700px; padding:30px">
+        <div class="col-md-3 col-lg-3" style="height:100%">
+            <div style="background-color: white;padding: 4px;height: 100%;">
+                <div style="padding-top:20px">
+                    <img src="~/assets/images/@session.Image" style="width:50px; border-radius:50%" />
+                    <span style="font-size:20px">@session.Name</span>
+                </div>
+                <ul style="padding-top:30px">
+                    <li><i class="fas fa-user-circle" style="font-size: 22px !important; color: brown !important; margin-right:10px"></i><a href="/Users/Detail/@session.UserID"> Tài khoản của tôi</a></li>
+                    <li><i class="fas fa-clipboard-list" style="font-size: 22px !important; color: cadetblue !important; margin-right:15px;color: brown !important"></i><a href="/Order/GetOrder/@session.UserID"> Đơn hàng của tôi</a></li>
+                    <li><i class="fas fa-sign-out-alt" style="font-size: 22px !important; color: orangered !important; margin-right:10px"></i> @Html.ActionLink("Đăng xuất", "Logout", "Users", null)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="cart-area col-md-9 col-lg-9" style="background-color: white; padding: 0px 10px; height:100%">
+            @if (Model.Count > 0)
+            {
+                <div class="chart-area">
+                    <div class="chart-item table-responsive fix" style="margin-top:30px">
+                        <table class="col-md-12">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Người đặt hàng</th>
+                                    <th>Thông tin đơn hàng</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody style="background-color: white">
+                                @foreach (var item in Model)
+                                {
+                                    <tr class='clickable-row' data-href='/Order/GetOrderDetail/@item.MaDH'>
+                                        <td>@item.MaDH</td>
+                                        <td>@item.NguoiDat</td>
+                                        <td style="text-align:initial">
+                                            <i class="fas fa-circle" style="margin-right:10px; font-size:6px"></i><span><b>Người nhận: </b></span>@item.NguoiNhan <br />
+                                            <i class="fas fa-circle" style="margin-right:10px; font-size:6px"></i><span><b>Ngày đặt hàng: </b></span>@Html.DisplayFor(modelItem => item.NgayDatHang)<br />
+                                            <i class="fas fa-circle" style="margin-right:10px; font-size:6px"></i><span><b>Địa chỉ người nhận: </b></span>@item.DiaChiNguoiNhan<br />
+                                            <i class="fas fa-circle" style="margin-right:10px; font-size:6px"></i><span><b>Số điện thoại người nhận: </b></span>@item.SDTNguoiNhan<br />
+                                            <i class="fas fa-circle" style="margin-right:10px; font-size:6px"></i><span><b>Tổng đơn hàng: </b></span>@item.TongTien VNĐ<br />
+                                        </td>
+                                        <td>
+                                            @if (item.TrangThai == 1)
+                                            {
+                                                <i class="fas fa-spinner" style="color: crimson; font-size: 25px"></i>
+                                            }
+                                            else if (item.TrangThai == 2)
+                                            {
+                                                <i class="fas fa-shipping-fast" style="color:cornflowerblue; font-size: 25px"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="far fa-check-square" style="background:springgreen; font-size: 25px"></i>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            }
+            else
+            {
+                <div style="background-color: white; text-align: center; padding: 40px; height:540px">
+                    <img src="~/assets/images/empty.png" />
+                    <p>Chưa có đơn hàng nào</p>
+                    <a class="btn btn-info" href="/Home/Index">Mua sắm ngay!</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<style>
+    .clickable-row:hover {
+        background-color: beige;
+    }
+</style>

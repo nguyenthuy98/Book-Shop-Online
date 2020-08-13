@@ -1,0 +1,122 @@
+﻿@model BookShopOnline.Models.Register
+@using BotDetect.Web.Mvc;
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+      rel="stylesheet" type="text/css" />
+@{
+    MvcCaptcha registerCaptcha = new MvcCaptcha("RegisterCaptcha");
+}
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+
+    <script>
+        $(document).ready(function () {
+
+            $('.btnSelectImage').on('click', function (e) {
+                e.preventDefault();
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (url) {
+                    $('#img').attr("src", url);
+                    var imgUrl = url.slice(22);
+                    $('.txtImageUpload').val(imgUrl);
+                };
+                finder.popup();
+            })
+
+            $('.date-picker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy'
+            });
+        });
+    </script>
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")"></script>
+}
+
+@using (Html.BeginForm("Register", "Users", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal register-form">
+        <h4>Đăng ký tài khoản</h4>
+
+        <div class="row" style="padding-top:40px">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="col-md-9" style="padding:40px">
+                        <img id="img" src="~/assets/images/defaultAvatar.png" style="width:180px; height:180px; margin-bottom:20px" />
+                        @Html.EditorFor(model => model.AnhDaiDien, new { htmlAttributes = new { @class = "form-control txtImageUpload" } })
+                        <a href="#" class="btn btn-info btnSelectImage" style="margin-top:10px">Chọn ảnh</a>
+                        @Html.ValidationMessageFor(model => model.AnhDaiDien, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7" style="padding:40px">
+                <div class="form-group">
+                    <div>
+                        @Html.EditorFor(model => model.TenTK, new { htmlAttributes = new { placeholder = "Tên đăng nhập", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenTK, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { placeholder = "Mật khẩu", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { placeholder = "Họ tên", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { placeholder = "Địa chỉ", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { placeholder = "dd-MM-yyyy", @class = "form-control date-picker" } })
+                        @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { placeholder = "Số điện thoại", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.Captcha(registerCaptcha)
+                        <br />
+                        @Html.TextBox("CaptchaCode")
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div>
+                        <input type="submit" value="Đăng ký" class="btn btn-primary btn-block" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

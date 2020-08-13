@@ -1,0 +1,112 @@
+﻿@model PagedList.IPagedList<Model.EF.TaiKhoan>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/assets/library/css/layout.css")
+<link rel="stylesheet" href="~/assets/library/css/sweetalert.min.css" />
+@section jsFooter{
+    <script src="~/assets/library/js/sweetalert.min.js"></script>
+    <script>
+        var ConfirmDelete = function (idItem) {
+            $.ajax({
+                type: "POST",
+                url: "/User/Delete",
+                data: { id: idItem },
+                success: function (result) {
+                    if (result == true) {
+                        $("#row_" + idItem).remove();
+                        swal({
+                            icon: "success",
+                            title: "Thành công!",
+                            text: "Xóa tài khoản thành công!",
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
+                    } else {
+                        swal({
+                            icon: "error",
+                            title: "Thất bại!",
+                            text: "Xóa tài khoản thất bại!",
+                            timer: 1500,
+                            showConfirmButton: false,
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+}
+<link href="~/assets/library/css/font-awesome.min.css" rel="stylesheet" />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb" style="margin-top: 0px !important">
+        <li class="breadcrumb-item"><a href="/Admin/Home/Index">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/User/Index">Quản lý tài khoản</a></li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Danh sách tài khoản
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Index", "User", FormMethod.Get))
+                {
+                    <div class="row form-group">
+                        <div class="col-lg-12">
+                            <a class="btn btn-primary" href="/Admin/User/Create">+ Thêm mới</a>
+                        </div>
+                    </div>
+                }
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr style="font-size:14px; background-color:burlywood">
+                                <th>Mã TK</th>
+                                <th>Tên tài khoản</th>
+                                <th>Họ tên</th>
+                                <th>Địa chỉ</th>
+                                <th>Ngày sinh</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Ảnh đại diện</th>
+                                <th>Ngày tạo</th>
+                                <th colspan="2">Tùy chỉnh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row_@item.MaTK">
+                                    <td>@item.MaTK</td>                                   
+                                    <td>@item.TenTK</td>
+                                    <td>@item.HoTen</td>
+                                    <td>@item.DiaChi</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NgaySinh)</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.SDT</td>
+                                    <td>
+                                        <img src="~/assets/images/@item.AnhDaiDien" style="width:60px;height:60px" />
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.NgayTao)</td>
+                                    <td>
+                                        <a href="/Admin/User/Edit/@item.MaTK" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger" onclick="ConfirmDelete(@item.MaTK)"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

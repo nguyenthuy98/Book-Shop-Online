@@ -1,0 +1,53 @@
+﻿@model List<Model.EF.KhuyenMai>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid promotion-area">
+    <div class="banner-pr">
+        <img src="~/assets/images/pr1.jpg" style="width: 100%" />
+        <img src="~/assets/images/pr2.jpg" style="width:70%; margin-left:15%" />
+        <a href="/Promotion/Index" class="buttonJoin">Tham gia ngay!!!</a>
+    </div>
+    <div class="row brand">
+        <div class="item-brand col-md-3">
+            <a href="#"><img src="~/assets/images/minhlongsale.jpg" /></a>
+        </div>
+        <div class="item-brand col-md-3">
+            <a href="#"><img src="~/assets/images/alphasale.jpg" /></a>
+        </div>
+        <div class="item-brand col-md-3">
+            <a href="#"><img src="~/assets/images/sky.jpg" /></a>
+        </div>
+        <div class="item-brand col-md-3">
+            <a href="#"><img src="~/assets/images/donga.jpg" /></a>
+        </div>
+    </div>
+    <div class="banner-pr">
+        <img src="~/assets/images/pr4.jpg" style="width:70%; margin-left:15%" />
+    </div>
+    <div class="main-pr">
+        <div class="single-product-slider similar-product">
+            <div class="product-items">
+                <h2 class="product-header" style="color:whitesmoke"> Khuyến mại HOT!</h2>
+                <div class="row">
+                    <div id="singleproduct-slider" class="owl-carousel">
+                        @foreach (var item in Model)
+                        {
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.TenKM</h5>
+                                    <p class="card-text">@item.MoTa</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner-pr">
+        <img src="~/assets/images/pr6.png" style="width:70%; margin:50px 15%" />
+    </div>
+</div>

@@ -1,0 +1,171 @@
+﻿@model Model.EF.DanhGia
+
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using BookShopOnline.Common;
+@{
+    var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+}
+<link rel="stylesheet" href="~/assets/library/css/sweetalert.min.css" />
+<style>
+    #googleMap {
+        height: 350px;
+    }
+    .sweet-alert h2{
+        font-size: 15px !important;
+    }
+</style>
+@section jsFooter{
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="~/assets/library/js/sweetalert.min.js"></script>
+    <script>
+        function initMap() {
+            var uluru = { lat: 21.053994, lng: 105.734471 };
+            var map = new google.maps.Map(document.getElementById('googleMap'), {
+                zoom: 18,
+                center: uluru
+            });
+
+            var contentString = '<b>Booklovers Store</b><br>Địa chỉ: 298 Đường Cầu Diễn, phường Minh Khai, quận Bắc Từ Liêm, Hà Nội<br>Điện thoại: 0243.7655121.';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+                title: 'Địa chỉ'
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+        </script>
+    <script>
+        $(document).ready(function () {
+            // show alert
+            $("#btnAlertMessage").click(function () {
+                var EmailId = $("#mail").val();
+                var Usname = $("#usname").val();
+                var ct = $("#content").val();
+                if ($.trim(Usname).length == 0) {
+                    alert("Hãy nhập tên!");
+                    return false;
+                } else if ($.trim(EmailId).length == 0) {
+                    alert("Hãy nhập địa chỉ email");
+                    return false;
+                } else if (!validateEmailAddress(EmailId)) {
+                    alert('Địa chỉ mail không hợp lệ');
+                    return false;
+                } else if ($.trim(ct).length == 0) {
+                    alert("Hãy nhập nội dung đánh giá!");
+                    return false;
+                } else if ($.trim(ct).length < 20) {
+                    alert("Nội dung đánh giá tối thiểu 20 ký tự!");
+                    return false;
+                } else{
+                    swal({
+                        icon: "success",
+                        title: "Success!",
+                        text: "Cảm ơn bạn đã đánh giá!",                        
+                        timer: 10000,
+                        showConfirmButton: false
+                    });
+                    return true;
+                }
+            });          
+            function validateEmailAddress(EmailId) {
+                var expr = /^[a-zA-Z0-9._]+[a-zA-Z0-9]+@@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/;
+                if (expr.test(EmailId)) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
+    </script>
+}
+<div class="contact-us-area">
+    <div class="map-area">
+        <div class="contact-map">
+            <div id="googleMap"></div>
+        </div>
+    </div>
+    <div class="contact-information">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="contact-details">
+                        <div class="contact-head">
+                            <h2>Liên hệ với chúng tôi</h2>
+                        </div>
+                        <div class="contact-bottom">
+                            <p><span><i class="fa fa-phone"></i></span> Điện thoại: +101-219-9600</p>
+                            <p><span><i class="fa fa-envelope"></i></span> E-mail: booklovers101@gmail.com</p>
+                            <p><span><i class="fa fa-link"></i></span> Website: <a href="#">www.booklovers.com</a></p>
+                            <p><span><i class="fa fa-map-marker"></i></span> Địa chỉ: 298 Cầu Diễn, Minh Khai, Bắc Từ Liêm, Hà Nội</p>
+                        </div>
+                        <div class="contact-social-icon footer-social-icon">
+                            <ul class="list-inline">
+                                <li><a href="#"><i class="fab fa-facebook" style="font-size:25px; color:darkblue"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" style="font-size:25px; color:blue"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus" style="font-size:25px; color:crimson"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin" style="font-size:25px; color:darkblue"></i></a></li>
+                                <li><a href="#"><i class="fab fa-pinterest-p" style="font-size:25px; color:red"></i></a></li>
+                                <li><a href="#"><i class="fab fa-vimeo" style="font-size:25px; color:orange"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="contact-leave-message">
+                        <div class="contact-head">
+                            <h2>Gửi ý kiến, đánh giá</h2>
+                        </div>
+                        <div style="border-left:1px solid lightgray">
+                            @using (Html.BeginForm("SendFeedBack", "Home", FormMethod.Post))
+                            {
+
+                                <div class="form-group col-md-5">
+                                    <label class="control-label">
+                                        Tên khách hàng
+                                    </label>
+                                    <input type="text" class="form-control" required id="usname">
+                                </div>
+                                <div class="form-group col-md-7">
+                                    <label class="control-label">
+                                        Email
+                                    </label>
+                                    <input type="text" class="form-control" id="mail" placeholder="e.g abc@domain.com" required>           
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="control-label">
+                                        Nội dung
+                                    </label>
+                                    <textarea rows="5" class="form-control" name="noidung" required id="content"></textarea>
+                                </div>
+                                if (session == null)
+                                {
+                                    <p style="color:red; padding-left:15px;">Bạn cần <span>@Html.ActionLink("Đăng nhập", "Login", "Users", null, new { @class = "text-red" })</span> để có thể gửi đánh giá!</p>
+                                    <button class="btn btn-warning" type="submit" style="background-color:gray;margin-left: 15px; width: 100px;" disabled>Gửi đánh giá</button>
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" name="matk" style="display:none" value="@session.UserID">
+                                    <input type="text" class="form-control" name="tentk" style="display:none" value="@session.UserName">
+                                    <button class="btn btn-warning" type="submit" style="margin-left: 15px; width: 100px;" name="alertMessage" id="btnAlertMessage" value="Alert Message">Gửi đánh giá</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

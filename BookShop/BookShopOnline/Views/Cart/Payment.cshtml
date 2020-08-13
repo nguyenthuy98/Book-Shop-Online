@@ -1,0 +1,118 @@
+﻿@model List<BookShopOnline.Models.CartItem>
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using BookShopOnline.Common;
+@section jsFooter{
+    <script>
+        $(document).ready(function () {
+            var value = $('#sumTotal').val();
+            $('#TongTien').val(value);
+
+    });
+    </script>       
+}
+<div class="checkout-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="billing-address">
+                    <div class="checkout-head">
+                        <h2>Thông tin đơn hàng</h2>
+                    </div>
+                    <div class="checkout-form">
+                        @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+                        {                           
+                            var session = (UserLogin)Session[CommonConstants.USER_SESSION];                            
+                            <input type="text" class="form-control" name="matk" value="@session.UserID" style="display:none">
+                            <input type="text" class="form-control" name="tongtien" id="TongTien" style="display:none">
+                            <div class="form-group" style="padding-bottom: 20px">
+                                <label class="control-label col-md-3">
+                                    Người đặt<sup>*</sup>
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="nguoidat" required>
+                                </div>
+                            </div>
+                            <div class="form-group" style="padding-bottom: 20px">
+                                <label class="control-label col-md-3">
+                                    Người nhận<sup>*</sup>
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="nguoinhan" required>
+                                </div>
+                            </div>
+                            <div class="form-group" style="padding-bottom: 20px">
+                                <label class="control-label col-md-3">
+                                    Địa chỉ<sup>*</sup>
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="diachi" required>
+                                </div>
+                            </div>
+                            <div class="form-group" style="padding-bottom: 20px">
+                                <label class="control-label col-md-3">
+                                    Số điện thoại<sup>*</sup>
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="tel" class="form-control" name="sdt" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                                </div>
+                            </div>
+                            <div class="form-group" style="padding-bottom: 20px">
+                                <label class="control-label col-md-3">
+                                    Chú thích<sup>*</sup>
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea rows="9" name="chuthich" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="payment-method" style="padding-top: 165px">
+                                <h2>Phương thức thanh toán</h2>
+                                <div class="payment-checkbox">
+                                    <input type="radio" checked> Thanh toán trực tiếp khi nhận hàng<br/>
+                                </div>
+                                <button type="submit" class="btn">Thanh toán</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="review-order">
+                    <div class="checkout-head">
+                        <h2>Chi tiết đơn hàng</h2>
+                    </div>
+                    @if (Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                        <div class="single-review">
+                            <div class="single-review-img">
+                                <a href="#"><img src="~/assets/images/@item.Sach.HinhAnh" alt="review" style="width:137px"></a>
+                            </div>
+                            <div class="single-review-content" style="overflow:hidden">
+                                <h2><a href="/Product/Detail/@item.Sach.MaSach">@item.Sach.TenSach</a></h2>
+                                <p><span>Đơn giá: </span> <strike><sup>đ</sup>@item.Sach.GiaBan.ToString("N0")</strike> <sup>đ</sup><span>@((item.Sach.GiaBan  - item.Sach.GiaBan * item.Sach.KhuyenMai.ChietKhau / 100).ToString("N0"))</span></p>
+                                <p><span>Số lượng: </span> @item.SoLuong</p>
+                                <p><span>Thành tiền: </span> <sup>đ</sup><span>@((item.Sach.GiaBan * item.SoLuong - item.Sach.GiaBan * item.Sach.KhuyenMai.ChietKhau * item.SoLuong / 100).ToString("N0"))</span></p>
+                            </div>
+                        </div>
+                        }
+                        <div class="subtotal-area">
+                            <div class="subtotal-content">
+                                <h2 style="float: left">Phí vận chuyển </h2>
+                                <h2 style="float: right"><sup>đ</sup>0</h2>
+                            </div>
+                            <div class="subtotal-content">
+                                <h2 style="float: left">Tổng số tiền</h2>
+                                <h2 style="float: right"><sup>đ</sup>@Model.Sum(i => i.Sach.GiaBan * i.SoLuong - i.SoLuong * i.Sach.GiaBan * i.Sach.KhuyenMai.ChietKhau / 100).ToString("N0")</h2>
+                                <input id="sumTotal" value="@Model.Sum(i => i.Sach.GiaBan * i.SoLuong - i.SoLuong * i.Sach.GiaBan * i.Sach.KhuyenMai.ChietKhau / 100)" style="display:none" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

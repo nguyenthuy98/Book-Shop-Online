@@ -1,0 +1,124 @@
+﻿@model Model.EF.DonHang
+@{
+    ViewBag.Title = "DetailsMonth";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/assets/library/css/layout.css")
+<link rel="stylesheet" href="~/assets/library/css/sweetalert.min.css" />
+@section jsFooter{
+    <script src="~/assets/library/js/sweetalert.min.js"></script>
+<script>
+        var ConfirmDelete = function (idItem) {
+            $.ajax({
+                type: "POST",
+                url: "/Order/Delete",
+                data: { id: idItem },
+                success: function (result) {
+                    if (result == true) {
+                        $("#row_" + idItem).remove();
+                        swal({
+                            icon: "success",
+                            title: "Thành công!",
+                            text: "Xóa đơn hàng thành công!",
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
+                    } else {
+                        swal({
+                            icon: "error",
+                            title: "Thất bại!",
+                            text: "Xóa đơn hàng thất bại!",
+                            timer: 1500,
+                            showConfirmButton: false,
+                        });
+                    }
+                }
+            });
+        };
+</script>
+    <script>
+        $(document).ready(function () {
+            $(".clickable-row").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+    
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb" style="margin-top: 0px !important">
+        <li class="breadcrumb-item"><a href="/Admin/Home/Index">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a href="#">Quản lý đơn hàng</a></li>
+    </ol>
+</nav>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Danh sách đơn hàng
+            </div>
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr style="font-size:14px; background-color:burlywood">
+                                <th>#</th>
+                                <th>Người đặt</th>
+                                <th>Ngày đặt</th>
+                                <th>Người nhận</th>
+                                <th>Địa chỉ nhận</th>
+                                <th>SĐT người nhận</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th colspan="2">Tùy chỉnh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row_@item.MaDH" class='clickable-row' data-href='/Admin/Order/Details/@item.MaDH'>
+                                    <td>@item.MaDH</td>
+                                    <td>
+                                        @item.NguoiDat
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NgayDatHang)
+                                    </td>
+                                    <td>
+                                        @item.NguoiNhan
+                                    </td>
+                                    <td>@item.DiaChiNguoiNhan</td>
+                                    <td>@item.SDTNguoiNhan</td>
+                                    <td>@item.TongTien</td>
+                                    <td>
+                                        @if (item.TrangThai == 1)
+                                        {
+                                            <i class="fas fa-spinner" style="color: crimson; font-size: 25px"></i>
+                                        }
+                                        else if (item.TrangThai == 2)
+                                        {
+                                            <i class="fas fa-shipping-fast" style="color:cornflowerblue; font-size: 25px"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="far fa-check-square" style="background:springgreen; font-size: 25px"></i>
+                                        }
+                                    </td>
+
+                                    <td>
+                                        <a href="/Admin/Order/Edit/@item.MaDH" class="btn btn-primary"><i class="far fa-edit"></i></a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger" onclick="ConfirmDelete(@item.MaDH)"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

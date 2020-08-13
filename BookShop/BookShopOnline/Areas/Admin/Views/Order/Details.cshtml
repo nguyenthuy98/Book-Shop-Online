@@ -1,0 +1,79 @@
+﻿@model Model.EF.DonHang
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/assets/library/css/layout.css")
+<div class="container">
+
+    <!--brekcumb-->
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="margin-top: 0px !important">
+            <li class="breadcrumb-item"><a href="/Admin/Home/Index">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="#">Quản lý đơn hàng</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Chi tiết đơn hàng / @Model.MaDH</li>
+        </ol>
+    </nav>
+
+    <!--main-->
+    <div class="row">
+        <div class="col-md-7">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr style="font-size:14px; background-color:burlywood">
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ChiTietDHs)
+            {
+                            <tr>
+                                <td>@item.MaSach
+                                <td>
+                                    @item.TenSP
+                                </td>
+                                <td>@item.SoLuong</td>
+                                <td>@item.DonGia</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br />
+        </div>
+        <div class="col-md-5">
+            <div style="width:70%">
+                <div style="background-color:cadetblue; padding:10px">
+                    <h4 class="text-center">Thông tin đơn hàng</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <p class="texts-order"><span style="color:#000;">Người đặt hàng: </span>@Model.NguoiDat</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="texts-order"><span style="color:#000;">Ngày đặt hàng: </span>@Html.DisplayFor(model =>Model.NgayDatHang)</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="texts-order"><span style="color:#000;">Người nhận: </span>@Model.NguoiNhan</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="texts-order"><span style="color:#000;">Địa chỉ: </span>@Model.DiaChiNguoiNhan</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="texts-order"><span style="color:#000;">Số điện thọai: </span>@Model.SDTNguoiNhan</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="texts-order"><span style="color:#000;">Tổng tiền: </span>@Model.TongTien</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @Html.ActionLink("Quay lại", "Index", null, htmlAttributes: new { @class = "btn btn-success" })
+</div>

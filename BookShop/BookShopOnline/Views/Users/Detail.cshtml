@@ -1,0 +1,69 @@
+﻿@model Model.EF.TaiKhoan
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row detail-acc-area" style="height:700px; padding:30px">
+        <div class="col-md-3 col-lg-3" style="height:100%">
+            <div style="background-color: white;padding: 4px;height: 100%;">
+                <div style="padding-top:20px">
+                    <img src="~/assets/images/@Model.AnhDaiDien" style="width:50px;border-radius:50%" />
+                    <span style="font-size:20px">@Model.HoTen</span>
+                </div>
+                <ul style="padding-top:30px">
+                    <li style="color:orangered"><i class="fas fa-user-circle" style="font-size: 22px !important; color: brown !important; margin-right:10px"></i> Tài khoản của tôi</li>
+                    <li><i class="fas fa-clipboard-list" style="font-size: 22px !important; color: cadetblue !important; margin-right:15px"></i><a href="/Order/GetOrder/@Model.MaTK"> Đơn hàng của tôi</a></li>
+                    <li><i class="fas fa-sign-out-alt" style="font-size: 22px !important; color: orangered !important; margin-right:10px"></i> @Html.ActionLink("Đăng xuất", "Logout", "Users", null)</li>
+                </ul>
+            </div>  
+        </div>
+        <div class="col-md-9 col-lg-9" style="height:100%; background-color: white;">
+            <div class="info">
+                <h3>Hồ sơ của tôi</h3>
+                <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                <hr />
+                <div class="col-md-9">                                     
+                    <div class="information-acc">
+                        <table class="table table-hover" style="margin-top: 50px;">                           
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Tên đăng nhập</th>
+                                    <td>@Model.TenTK</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <th scope="row">Họ tên</th>
+                                    <td>@Model.HoTen</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <th scope="row">Địa chỉ</th>
+                                    <td colspan="2">@Model.DiaChi</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Ngày sinh</th>
+                                    <td colspan="2">@Html.DisplayFor(modelItem => @Model.NgaySinh)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Email</th>
+                                    <td colspan="2">@Model.Email</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Số điện thoại</th>
+                                    <td colspan="2">@Model.SDT</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="/Users/Update/@Model.MaTK" class="btn btn-info" style="margin-top:80px"><i class="fas fa-edit"></i> Sửa thông tin tài khoản</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <img src="~/assets/images/@Model.AnhDaiDien" style="width: 130px; margin: 40px 25px;"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

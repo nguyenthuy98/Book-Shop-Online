@@ -1,0 +1,47 @@
+﻿@model BookShopOnline.Areas.Admin.Models.LoginModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Welcome Admin!</title>
+    <!-- import library -->
+    <link rel="stylesheet" href="~/assets/library/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/library/css/styleadmin.css"/>
+    <link rel="stylesheet" href="~/assets/library/css/all.min.css" />
+    <style>
+        .field-validation-error{
+            color:black !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container login-container">
+        <div class="row">
+            <div class="col-md-6 login-form-1">
+                <img src="~/assets/images/logo1.png" />
+                <h3>Hello! let's get started</h3>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                    {                       
+                        <fieldset>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.TenTK, new { @class = "form-control", @autofocus = "autofocus", placeholder="Enter your name" })
+                            </div>
+                            <div class="form-group">
+                                @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", placeholder = "Enter your password" })
+                            </div>
+                            @Html.ValidationSummary(false, "", new { @class = "text-white" });
+                            <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                        </fieldset>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--script-->
+    <script src="~/assets/library/js/bootstrap.min.js"></script>
+    <script src="~/assets/library/js/jquery-3.4.1.min.js"></script>
+</body>
+</html>

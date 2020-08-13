@@ -1,0 +1,126 @@
+﻿@model Model.EF.TaiKhoan
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script>
+        // select image
+        $('.btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#img').attr("src", url);
+                var imgUrl = url.slice(22);
+                $('.txtImageUpload').val(imgUrl);
+            };
+            finder.popup();
+        })
+        var editor = CKEDITOR.replace('txtContent', {
+            customConfig: '/assets/library/js/plugin/ckfinder/config.js',
+        });
+        // select date
+        $('.date-picker').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd-mm-yy'
+        });
+
+    </script>
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")"></script>
+}
+<div class="container">
+    <div class="row detail-acc-area" style="height:600px; padding:30px">
+        <div class="col-md-3 col-lg-3" style="height:100%">
+            <div style="background-color: white;padding: 4px;height: 100%;">
+                <div style="padding-top:20px">
+                    <img src="~/assets/images/@Model.AnhDaiDien" style="width:50px; border-radius:50%" />
+                    <span style="font-size:20px">@Model.HoTen</span>
+                </div>
+                <ul style="padding-top:30px">
+                    <li><i class="fas fa-user-circle" style="font-size: 22px !important; color: brown !important; margin-right:10px"></i><a href="/Users/Detail/@Model.MaTK"> Tài khoản của tôi</a></li>
+                    <li><i class="fas fa-clipboard-list" style="font-size: 22px !important; color: cadetblue !important; margin-right:15px"></i><a href="/Order/GetOrder/@Model.MaTK"> Đơn hàng của tôi</a></li>
+                    <li><i class="fas fa-sign-out-alt" style="font-size: 22px !important; color: orangered !important; margin-right:10px"></i> @Html.ActionLink("Đăng xuất", "Logout", "Users", null)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9 col-lg-9" style="height:100%; background-color: white;">
+            <div class="info">
+                <h3>Sửa thông tin tài khoản</h3>
+                <hr />
+                @using (Html.BeginForm("Update", "Users", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.MaTK);
+                    @Html.HiddenFor(model => model.MaNhomTK);
+                    <div class="col-md-9">
+                        <div class="information-acc">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Tên đăng nhập</th>
+                                        <td>
+                                            @Html.EditorFor(model => model.TenTK, new { htmlAttributes = new { placeholder = "Tên đăng nhập", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TenTK, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mật khẩu</th>
+                                        <td>
+                                            @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { placeholder = "Mật khẩu", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Họ tên</th>
+                                        <td>
+                                            @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { placeholder = "Họ tên", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Địa chỉ</th>
+                                        <td colspan="2">
+                                            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { placeholder = "Địa chỉ", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Ngày tháng năm sinh</th>
+                                        <td colspan="2">
+                                            @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { placeholder = "dd-MM-yyyy", @class = "form-control date-picker" } })
+                                            @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email</th>
+                                        <td colspan="2">
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Số điện thoại</th>
+                                        <td colspan="2">
+                                            @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { placeholder = "Số điện thoại", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-primary btn-block">Lưu</button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <img id="img" src="~/assets/images/@Model.AnhDaiDien" style="width:180px; height:180px; margin-bottom:20px" />
+                        @Html.EditorFor(model => model.AnhDaiDien, new { htmlAttributes = new { @class = "form-control txtImageUpload" } })
+                        <a href="#" class="btn btn-info btnSelectImage" style="margin-top:10px; width:185px">Chọn ảnh</a>
+                        @Html.ValidationMessageFor(model => model.AnhDaiDien, "", new { @class = "text-danger" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

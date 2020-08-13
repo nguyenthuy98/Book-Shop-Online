@@ -1,0 +1,23 @@
+﻿@model List<Model.EF.DanhMucSP>
+@Styles.Render("~/assets/library/css/style.css")
+
+
+
+<div class="product-catagori-area" style="height: 565px;padding: 0px 5px;">
+    <div class="product-categeries">
+        <h2>Danh mục sách</h2>
+@foreach (var item in Model)
+{
+        <div class="panel-group" id="accrodian">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">    
+                         <a href="/Product/Category/@item.MaDM"><img src="~/assets/images/image-removebg-preview.png" width="30" /> @item.TenDM</a>                     
+                    </h4>
+                </div>
+            </div> 
+        </div>
+}
+    </div>
+</div>
+

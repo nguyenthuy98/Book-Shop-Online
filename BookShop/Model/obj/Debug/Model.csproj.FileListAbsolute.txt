@@ -1,0 +1,83 @@
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\Model.dll.config
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\Model.dll
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\Model.pdb
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\EntityFramework.dll
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\EntityFramework.xml
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\ThucTapTotNghiep\BookShopOnline\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\ThucTapTotNghiep\BookShopOnline\Model\obj\Debug\Model.dll
+E:\ThucTapTotNghiep\BookShopOnline\Model\obj\Debug\Model.pdb
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\PagedList.dll
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\PagedList.Mvc.dll
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\PagedList.xml
+E:\ThucTapTotNghiep\BookShopOnline\Model\bin\Debug\PagedList.Mvc.xml
+D:\BookShopOnline - Copy\Model\bin\Debug\Model.dll.config
+D:\BookShopOnline - Copy\Model\bin\Debug\Model.dll
+D:\BookShopOnline - Copy\Model\bin\Debug\Model.pdb
+D:\BookShopOnline - Copy\Model\bin\Debug\EntityFramework.dll
+D:\BookShopOnline - Copy\Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\BookShopOnline - Copy\Model\bin\Debug\PagedList.dll
+D:\BookShopOnline - Copy\Model\bin\Debug\PagedList.Mvc.dll
+D:\BookShopOnline - Copy\Model\bin\Debug\EntityFramework.xml
+D:\BookShopOnline - Copy\Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\BookShopOnline - Copy\Model\bin\Debug\PagedList.xml
+D:\BookShopOnline - Copy\Model\bin\Debug\PagedList.Mvc.xml
+D:\BookShopOnline - Copy\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\BookShopOnline - Copy\Model\obj\Debug\Model.dll
+D:\BookShopOnline - Copy\Model\obj\Debug\Model.pdb
+D:\BookShop\Model\bin\Debug\Model.dll.config
+D:\BookShop\Model\bin\Debug\Model.dll
+D:\BookShop\Model\bin\Debug\Model.pdb
+D:\BookShop\Model\bin\Debug\EntityFramework.dll
+D:\BookShop\Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\BookShop\Model\bin\Debug\PagedList.dll
+D:\BookShop\Model\bin\Debug\PagedList.Mvc.dll
+D:\BookShop\Model\bin\Debug\EntityFramework.xml
+D:\BookShop\Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\BookShop\Model\bin\Debug\PagedList.xml
+D:\BookShop\Model\bin\Debug\PagedList.Mvc.xml
+D:\BookShop\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\BookShop\Model\obj\Debug\Model.dll
+D:\BookShop\Model\obj\Debug\Model.pdb
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\Model.dll.config
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\Model.dll
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\Model.pdb
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\EntityFramework.dll
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\PagedList.dll
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\PagedList.Mvc.dll
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\EntityFramework.xml
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\PagedList.xml
+E:\ThucTapTotNghiep\BookShop\Model\bin\Debug\PagedList.Mvc.xml
+E:\ThucTapTotNghiep\BookShop\Model\obj\Debug\Model.dll
+E:\ThucTapTotNghiep\BookShop\Model\obj\Debug\Model.pdb
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\Model.dll.config
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\Model.dll
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\Model.pdb
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\EntityFramework.dll
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\PagedList.dll
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\PagedList.Mvc.dll
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\EntityFramework.xml
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\PagedList.xml
+E:\ThucTapTotNghiep\BookShop1\Model\bin\Debug\PagedList.Mvc.xml
+E:\ThucTapTotNghiep\BookShop1\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\ThucTapTotNghiep\BookShop1\Model\obj\Debug\Model.dll
+E:\ThucTapTotNghiep\BookShop1\Model\obj\Debug\Model.pdb
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\Model.dll.config
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\Model.dll
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\Model.pdb
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\EntityFramework.dll
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\PagedList.dll
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\PagedList.Mvc.dll
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\EntityFramework.xml
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\PagedList.xml
+E:\ThucTapTotNghiep - Copy\BookShop\Model\bin\Debug\PagedList.Mvc.xml
+E:\ThucTapTotNghiep - Copy\BookShop\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\ThucTapTotNghiep - Copy\BookShop\Model\obj\Debug\Model.dll
+E:\ThucTapTotNghiep - Copy\BookShop\Model\obj\Debug\Model.pdb

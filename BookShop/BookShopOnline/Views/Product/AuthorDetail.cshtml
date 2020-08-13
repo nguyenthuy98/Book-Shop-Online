@@ -1,0 +1,72 @@
+﻿@model Model.EF.Sach
+@{
+    ViewBag.Title = "AuthorDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sameAuthor = (List<Model.EF.Sach>)ViewBag.ListSameAuthor;
+}
+<div class="product-item-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <!--content-->
+                <div class="row content" style="margin-top:20px">
+                    <div class="col-md-5 col-sm-5">
+                        <div class="product-item-tab">
+                            <div class="single-tab-content">
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="img-one"><img src="~/assets/images/@Model.TacGia.HinhAnh" alt="tab-img"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-7">
+                        <div class="product-tab-content" style="margin-top:-20px">
+                            <div class="product-tab-header">
+                                <h3>Tác giả @Model.TacGia.TenTG</h3>
+                                <h4 style="padding-left:4px"><i>Giới thiệu:</i></h4>
+                                <p>@Model.TacGia.MoTa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--sách liên quan-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="single-product-slider similar-product">
+                            <div class="product-items">
+                                <h2 class="product-header">Sách của tác giả @Model.TacGia.TenTG</h2>
+                                <div class="row">
+                                    <div id="singleproduct-slider" class="owl-carousel">
+                                        @foreach (var item in sameAuthor)
+                                        {
+                                            <div>
+                                                <div class="single-product">
+                                                    <div class="single-product-img">
+                                                        <a href="/Product/Detail/@item.MaSach">
+                                                            <img class="primary-img" src="~/assets/images/@item.HinhAnh" alt="product">
+                                                        </a>
+                                                        <div class="single-product-action">
+                                                            <a href="/Product/Detail/@item.MaSach"><i class="fas fa-eye"></i></a>
+                                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="single-product-content">
+                                                        <div class="product-content">
+                                                            <h2><a href="/Product/Detail/@item.MaSach">@item.TenSach</a></h2>
+                                                            <p>Gía : @item.GiaBan VNĐ</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,29 @@
+﻿@model Model.EF.TinTuc
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sameNews = (List<Model.EF.TinTuc>)ViewBag.SameNews;
+}
+
+<div class="container">
+    <div>
+        <div class="row">
+            <div class="col-md-7" style="padding-top:25px">
+                <div class="jumbotron">
+                    <h3 class="display-4" style="font-weight:bold">@Model.TieuDe</h3>
+                    <p>Ngày tạo: @Html.DisplayFor(modelItem => Model.NgayTao)</p>
+                    <p class="lead">@Model.NoiDung</p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h3 style="font-weight:bold">Các tin tức khác >></h3>
+                @foreach (var item in sameNews)
+                {
+                    <ul>
+                        <li style="font-size:16px; margin-bottom: 8px"><a href="/News/Detail/@item.MaTinTuc"><i class="fas fa-caret-square-right"></i>&nbsp;@item.TieuDe</a></li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>

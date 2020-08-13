@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Admin Homepage</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/assets/library/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="~/assets/library/css/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/assets/library/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/assets/library/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/library/css/layout.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/assets/library/css/jquery-ui.css" />
+    <link rel="stylesheet" href="~/assets/library/css/sweetalert.min.css" />
+</head>
+<body>
+    <div id="wrapper" style="background-color: darkcyan">
+        <!-- Navigation -->
+        @RenderPage("_Navigation.cshtml")
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid" style="margin-top:0px !important"> 
+                <div style="width:100%;">
+                    @if (TempData["AlertMessage"] != null)
+                    {
+                        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                            @TempData["AlertMessage"]
+                        </div>
+                    }  
+                </div>                            
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="~/assets/library/js/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/assets/library/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/assets/library/js/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/assets/library/js/sb-admin-2.js"></script>
+    <script src="~/assets/library/js/all.min.js"></script>
+    <script src="~/assets/library/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/assets/library/js/plugin/ckfinder/ckfinder.js"></script>
+    <script src="~/assets/library/js/jquery-ui.js"></script>
+    <script src="~/assets/library/js/jquery.validate.min.js"></script>
+    <script src="~/assets/library/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/assets/library/js/sweetalert.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>
